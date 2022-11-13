@@ -28,6 +28,4 @@ router.get(
 router.patch("/user/profile", authGuard, userController.updateUser);
 router.get("/user/profile", authGuard, userController.updateUser);
 
-// router.delete('/user/profile', authGuard, userController.deleteUserAccount);
-
 export default router;
