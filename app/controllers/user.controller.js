@@ -8,11 +8,10 @@ import UserReviews from "../models/src/user.reviews";
 import Helper from "../helpers/helper";
 
 export default class UserController {
-  //get a user from the user token
+  //get a user account
   static async getUser(req, res) {
     try {
       const user = req.user;
-      // const user = await User.findOne({ _id: req.params.id });
       return res.status(200).send({ user: user });
     } catch (e) {
       return res.status(500).send(
@@ -42,6 +41,7 @@ export default class UserController {
       );
     }
   }
+
   ///update user's account
   static async updateUser(req, res) {
     const httpRequest = adaptRequest(req);
@@ -107,7 +107,7 @@ export default class UserController {
     }
   }
 
-  //get all messages
+  //get all messages from both receivers and senders
   static async getMessages(req, res) {
     try {
       const user = req.user;
