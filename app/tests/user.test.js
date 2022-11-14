@@ -9,6 +9,7 @@ const user = {
   email: "njine20@gmail.com",
   phoneNumber: "0717708291",
   password: "Gi10807108",
+  dateOfBirth: "12/2/1993",
 };
 var userToken = "";
 var loginToken = "";
@@ -22,14 +23,7 @@ beforeEach(async () => {
 test("Should sign up for a user", async () => {
   await request(app)
     .post("/user/signup")
-    .send({
-      firstName: "Gibson",
-      lastName: "Munene",
-      email: "njine10@gmail.com",
-      phoneNumber: "0741785762",
-      password: "Gi10807108",
-      dateOfBirth: "12/2/1993",
-    })
+    .send(user)
     .expect(201)
     .then((response) => {
       loginToken = response.body.user.token;

@@ -11,9 +11,11 @@ export default async function makeDb() {
   config.username = process.env.DB_USER;
   config.password = process.env.DB_PASS;
   config.host = process.env.DB_HOST;
+  console.log("this is the config: ", config);
   if (environment === "production") {
     // Use this url when in production
     // url = `mongodb+srv://${config.username}:${config.password}@${config.host}/${config.database}?retryWrites=true&w=majority`;
+    url = `mongodb+srv://${config.username}:${config.password}@${config.host}/${config.database}?retryWrites=true&w=majority`;
   } else {
     // Use this url locally
     // url = `mongodb://localhost:27017`;
@@ -29,8 +31,8 @@ export default async function makeDb() {
     })
     .then(() => console.log(".... Connected ...."))
     .catch((error) => {
-      console.log("Connections issues");
-      throw Error("Connections issues");
+      console.log("Connections issues", error);
+      // throw Error("Connections issues");
     });
 
   mongoose.Promise = global.Promise;
