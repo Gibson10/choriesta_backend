@@ -8,6 +8,12 @@ import UserReviews from "../models/src/user.reviews";
 import Helper from "../helpers/helper";
 
 export default class UserController {
+  /**
+   * Foo takes any argument.
+   * The return value is 'baz' in all cases.
+   * @param {*} req - Any argument
+   * @param {*} [res] - An optional argument that is a string
+   */
   //get a user account
   static async getUser(req, res) {
     try {
@@ -32,7 +38,7 @@ export default class UserController {
         await req.user.deleteChoreista();
       }
 
-      return res.status(201).send(req.user);
+      return res.status(200).send(req.user);
     } catch (e) {
       return res.status(500).send(
         makeHttpError({
@@ -132,7 +138,7 @@ export default class UserController {
     const dataPayload = Helper.requestBody(body);
     try {
       const review = await new UserReviews(dataPayload).save();
-      return res.status(201).send({ review: review });
+      return res.status(200).send({ review: review });
     } catch (e) {
       return res.status(400).send(
         makeHttpError({
