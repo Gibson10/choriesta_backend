@@ -52,7 +52,7 @@ router.post("/user/confirm", authGuard, authController.confirmUser);
  */
 router.post("/user/email", authController.confirmEmail);
 /**
- * @api {user} /user/resend-cod resend registration code
+ * @api {user} /user/resend-code resend registration code
  * @apiVersion 1.0.0
  * @apiName resend code
  * @apiParam (Request Header) {String} token token of the user
@@ -75,7 +75,7 @@ router.post("/user/logout", authGuard, authController.logout);
  * @api {user} /user/reviews create a review
  * @apiVersion 1.0.0
  * @apiName create reviews
- * @apiParam (Request Header) {Json Object} object containing the review
+ * @apiParam (Request Body) {Json Object} object containing the review
  * @apiSuccess (Success 200) {String} "Success"
  * @apiSuccess (Success 200) {json Object} review created
  * @ApiError (Error 500) {json Object} error  error message
