@@ -5,12 +5,20 @@ import User from "../models/src/user.model";
 import Chore from "../models/src/chore.model";
 import Reviews from "../models/src/user.reviews";
 import dbUpdate from "../helpers/db-updates";
+import { Request, Response, NextFunction } from "express";
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 export default class ChoreController {
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
+
   // create  a new chore
   static async createNewChore(req, res) {
     const httpRequest = adaptRequest(req);
@@ -29,6 +37,12 @@ export default class ChoreController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //get choreowner chores by id
   static async getChores(req, res) {
@@ -52,6 +66,12 @@ export default class ChoreController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //get chores from every choreowner
   static async getAllChores(req, res) {
@@ -71,7 +91,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   //get reviews
   static async getReviews(req, res) {
     try {
@@ -88,7 +113,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   // allows applicants to submit their application
   static async applyChore(req, res) {
     const httpRequest = adaptRequest(req);
@@ -127,7 +157,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   //get chores by creator
   static async getAllChores(req, res) {
     try {
@@ -146,7 +181,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   //accept applicants who apply for a chore
   static async acceptApplicant(req, res) {
     const httpRequest = adaptRequest(req);
@@ -180,7 +220,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   //search specific chores
   static async searchChores(req, res) {
     const regex = new RegExp(escapeRegex(req.params.query), "gi");
@@ -199,7 +244,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   // updates the chore status when the choreowner starts and when the choriesta completes it
   static async choreStatus(req, res) {
     const httpRequest = adaptRequest(req);
@@ -208,7 +258,7 @@ export default class ChoreController {
       if (err) return res.status(500).json({ message: err.message });
       const status = { status: true };
       chore.choreStarted = status;
-      const user = await dbUpdate.choreStatus(
+      const user = await dbUpdate.updateChoreStatus(
         req.params.choreista,
         req.params.choreId,
         body.status
@@ -228,7 +278,12 @@ export default class ChoreController {
         .json({ chore: chore, user: user, token: user.tokens[0].token });
     });
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   // delete a chore
   static async deleteChore(req, res) {
     try {
@@ -243,7 +298,12 @@ export default class ChoreController {
       );
     }
   }
-
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   // update chore details
   static async updateChore(req, res) {
     const httpRequest = adaptRequest(req);

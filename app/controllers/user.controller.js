@@ -6,14 +6,16 @@ import Messages from "../models/src/messages.model";
 
 import UserReviews from "../models/src/user.reviews";
 import Helper from "../helpers/helper";
+import { Request, Response, NextFunction } from "express";
 
 export default class UserController {
   /**
-   * Foo takes any argument.
-   * The return value is 'baz' in all cases.
-   * @param {*} req - Any argument
-   * @param {*} [res] - An optional argument that is a string
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
    */
+
   //get a user account
   static async getUser(req, res) {
     try {
@@ -27,6 +29,13 @@ export default class UserController {
       );
     }
   }
+
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //delete user account
   static async deleteUserAccount(req, res) {
@@ -47,6 +56,13 @@ export default class UserController {
       );
     }
   }
+
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   ///update user's account
   static async updateUser(req, res) {
@@ -112,6 +128,12 @@ export default class UserController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //get all messages from both receivers and senders
   static async getMessages(req, res) {
@@ -130,6 +152,12 @@ export default class UserController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //update user's reviews
   static async createUserReviews(req, res) {
@@ -148,6 +176,12 @@ export default class UserController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //get user's reviews
   static async getUserReviews(req, res) {

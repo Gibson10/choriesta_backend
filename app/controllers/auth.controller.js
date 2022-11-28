@@ -5,7 +5,15 @@ import User from "../models/src/user.model";
 import randomGenerate from "../helpers/codeGenerate";
 import { mailer } from "../helpers/sendGrid";
 
+import { Request, Response, NextFunction } from "express";
+
 export default class AuthController {
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   //login a user
   static async login(req, res) {
     const httpRequest = adaptRequest(req);
@@ -41,6 +49,12 @@ export default class AuthController {
     }
   }
 
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
   /// create a new user
   static async createNewUser(req, res) {
     const httpRequest = adaptRequest(req);
@@ -81,6 +95,14 @@ export default class AuthController {
       );
     }
   }
+  /**
+
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns
+ */
+
   //confirm whether a user is registered
   static async confirmUser(req, res) {
     const httpRequest = adaptRequest(req);
@@ -106,6 +128,12 @@ export default class AuthController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //resend confirmation code
   static async resendCode(req, res) {
@@ -121,6 +149,12 @@ export default class AuthController {
       );
     }
   }
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //send a confirmation that a user's email is registered
   static async confirmEmail(req, res) {
@@ -142,6 +176,13 @@ export default class AuthController {
     }
   }
 
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
+
   /// Log out from current session
   static async logout(req, res) {
     try {
@@ -158,6 +199,13 @@ export default class AuthController {
       );
     }
   }
+
+  /**
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   /// Log out all sessions from every devices
   static async logoutAll(req, res) {
