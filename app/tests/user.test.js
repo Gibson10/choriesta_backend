@@ -13,14 +13,19 @@ const user = {
 };
 var userToken = "";
 var loginToken = "";
+
 beforeEach(async () => {
   await User.deleteMany({});
   const newUser = await User(user).save();
   const token = await newUser.generateToken();
   userToken = token;
 });
+/**
+ * @description Test for user signup
+ * @returns {object} user
+ */
 
-test("Should sign up for a user", async () => {
+test("Is a user being signed in correctly", async () => {
   await request(app)
     .post("/user/signup")
     .send(user)
@@ -29,7 +34,11 @@ test("Should sign up for a user", async () => {
       loginToken = response.body.user.token;
     });
 });
-
+/**
+ * @description Test for user login
+ * @returns {object} user
+ * @expect(200)
+ */
 test("Should login for a user", async () => {
   await request(app)
     .post("/user/login")
@@ -39,7 +48,11 @@ test("Should login for a user", async () => {
     })
     .expect(200);
 });
-
+/**
+ * @description Test updating user profile
+ * @returns {object} user
+ * @expect(200)
+ */
 test("Update user", async () => {
   await request(app)
     .patch("/user/profile")
@@ -55,6 +68,11 @@ test("Update user", async () => {
     .expect(200);
 });
 
+/**
+ * @description Test get user profile
+ * @returns {object} user
+ * @expect(200)
+ */
 test("Get User", async () => {
   await request(app)
     .get("/user/profile")
@@ -62,7 +80,11 @@ test("Get User", async () => {
     .set("Authorization", "Bearer " + userToken)
     .expect(200);
 });
-
+/**
+ * @description Test for logout user
+ * @returns {object} user
+ * @expect(200)
+ */
 test("Logout a  User", async () => {
   await request(app)
     .post("/user/logout")
