@@ -3,7 +3,7 @@ import Messages from "../models/src/messages.model";
 
 class dbUpdate {
   /**
-   * update messages  on the user message array
+   * @description update messages  on the user message array
    * @param {String} sender - The id of the sender of the message
    * @param {String} receiver - The id of the receiver of the message
    * @param {String} senderName - The name of the sender of the message
@@ -26,7 +26,7 @@ class dbUpdate {
     });
   }
   /**
-   * update applicant chores
+   * @description update applicant chores
    * @param {String} applicantId - The id of the applicant
    * @param {String} choreid - The id of the chore
    * @returns {Object} - The updated user object
@@ -44,7 +44,7 @@ class dbUpdate {
     });
   }
   /**
-   * update chore status
+   * @description update chore status
    * @param {String} choreistaId - The id of the choreista
    * @param {String} choreid - The id of the chore
    * @param {String} status - The status of the chore
