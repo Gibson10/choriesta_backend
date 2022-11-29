@@ -9,12 +9,13 @@ import { Request, Response, NextFunction } from "express";
 
 export default class AuthController {
   /**
+   * @description This method logs a user in
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
-  //login a user
+
   static async login(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -50,6 +51,7 @@ export default class AuthController {
   }
 
   /**
+   * @description This method registers a user
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -96,12 +98,12 @@ export default class AuthController {
     }
   }
   /**
-
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- * @returns
- */
+   * @description This method helps confirm whether a user is registered
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @returns
+   */
 
   //confirm whether a user is registered
   static async confirmUser(req, res) {
@@ -129,13 +131,13 @@ export default class AuthController {
     }
   }
   /**
+   * @description This method helps a user reset their password by sending a code to their email
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //resend confirmation code
   static async resendCode(req, res) {
     try {
       const user = req.user;
@@ -150,6 +152,7 @@ export default class AuthController {
     }
   }
   /**
+   * @description This method helps a user reset their password by sending a code to their email
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -177,13 +180,13 @@ export default class AuthController {
   }
 
   /**
+   * @description This method  log outs from current session
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  /// Log out from current session
   static async logout(req, res) {
     try {
       req.user.tokens = req.user.tokens.filter((token) => {
@@ -201,13 +204,13 @@ export default class AuthController {
   }
 
   /**
+   * @description This method  log outs a user from all sessions
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  /// Log out all sessions from every devices
   static async logoutAll(req, res) {
     try {
       req.user.tokens = [];

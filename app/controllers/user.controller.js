@@ -10,13 +10,13 @@ import { Request, Response, NextFunction } from "express";
 
 export default class UserController {
   /**
+   * @description - This method gets all users
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //get a user account
   static async getUser(req, res) {
     try {
       const user = req.user;
@@ -31,13 +31,13 @@ export default class UserController {
   }
 
   /**
+   * @description - This method deletes a user account
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //delete user account
   static async deleteUserAccount(req, res) {
     try {
       const userType = req.params.userType;
@@ -58,13 +58,13 @@ export default class UserController {
   }
 
   /**
+   * @description - This method update user's account
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  ///update user's account
   static async updateUser(req, res) {
     const httpRequest = adaptRequest(req);
     const { body, file } = httpRequest;
@@ -129,13 +129,13 @@ export default class UserController {
     }
   }
   /**
+   * @description - This method gets all messages from both receivers and senders
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //get all messages from both receivers and senders
   static async getMessages(req, res) {
     try {
       const user = req.user;
@@ -153,13 +153,13 @@ export default class UserController {
     }
   }
   /**
+   * @description - This method update user's reviews
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //update user's reviews
   static async createUserReviews(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -177,13 +177,13 @@ export default class UserController {
     }
   }
   /**
+   * @description - This method gets user's reviews
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //get user's reviews
   static async getUserReviews(req, res) {
     try {
       const user = req.user;

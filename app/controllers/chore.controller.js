@@ -13,13 +13,13 @@ function escapeRegex(text) {
 
 export default class ChoreController {
   /**
+   * @description This method allows a chore owner create  a new chore
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  // create  a new chore
   static async createNewChore(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -38,13 +38,13 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows a chore owner to get  chores by id
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
 
-  //get choreowner chores by id
   static async getChores(req, res) {
     try {
       const user = req.user;
@@ -67,6 +67,7 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method gets chores from every choreowner
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -92,6 +93,7 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows a chore owner to get all their reviews
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -114,6 +116,7 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows allows applicants to submit their application for a gig
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -158,6 +161,7 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows a chore owner to get all their chores
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -182,6 +186,7 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows a chore owner accept applicants who apply for a chore
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -221,12 +226,13 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows choriesta to search for a chore based on a keyword
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
-  //search specific chores
+
   static async searchChores(req, res) {
     const regex = new RegExp(escapeRegex(req.params.query), "gi");
     try {
@@ -245,12 +251,13 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method updates the chore status when the choreowner starts and when the choriesta completes it
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
-  // updates the chore status when the choreowner starts and when the choriesta completes it
+
   static async choreStatus(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -279,6 +286,7 @@ export default class ChoreController {
     });
   }
   /**
+   * @description This method allows a chore owner to delete a chore
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
@@ -299,12 +307,13 @@ export default class ChoreController {
     }
   }
   /**
+   * @description This method allows a chore owner to  update chore details
    * @param {Request} req
    * @param {Response} res
    * @param {NextFunction} next
    * @returns
    */
-  // update chore details
+
   static async updateChore(req, res) {
     const httpRequest = adaptRequest(req);
     const { body, file } = httpRequest;
