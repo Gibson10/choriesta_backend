@@ -7,7 +7,7 @@ phases:
       - npm install
 
       # Upgrade AWS CLI to the latest version
-      - npm start
+      # - npm start
 artifacts:
   files:
     - "**/*"
