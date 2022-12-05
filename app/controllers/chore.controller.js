@@ -13,11 +13,17 @@ function escapeRegex(text) {
 
 export default class ChoreController {
   /**
-   * @description This method allows a chore owner create  a new chore
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name createNewChore
+   * @description This function creates a new chore with the given data.
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   *
+   * @return {Object} chore  - The chore object
+   *
+   * @example
+   *
+   * createNewChore(req, res)
    */
 
   static async createNewChore(req, res) {
@@ -38,11 +44,11 @@ export default class ChoreController {
     }
   }
   /**
-   * @description This method allows a chore owner to get  chores by id
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getChores
+   * @description This method will fetch all the chores assigned to the user based on the category.
+   * @param {Object} req
+   * @param {Object} res
+   * @returns {Object} user
    */
 
   static async getChores(req, res) {
@@ -67,14 +73,17 @@ export default class ChoreController {
     }
   }
   /**
-   * @description This method gets chores from every choreowner
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getAllChores
+   * @description Returns all chores within a given category
+   *
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   *
+   * @returns {Object} - Chores within the given category
+   *
+   * @async
+   * @function
    */
-
-  //get chores from every choreowner
   static async getAllChores(req, res) {
     try {
       const user = req.user;
@@ -92,14 +101,15 @@ export default class ChoreController {
       );
     }
   }
+
   /**
-   * @description This method allows a chore owner to get all their reviews
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getReviews
+   * @summary This method allows a chore owner to get all their reviews
+   * @route {GET} /reviews/:id
+   * @param {string} req.params.id - The item id
+   * @returns {Object} reviewer - The reviews of the item
    */
-  //get reviews
+
   static async getReviews(req, res) {
     try {
       await Reviews.find({ reviewed: req.params.id })
@@ -116,13 +126,12 @@ export default class ChoreController {
     }
   }
   /**
-   * @description This method allows allows applicants to submit their application for a gig
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name applyChore
+   * @description This method allows a user to apply for a specific chore.
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} - The chore object, user object and token
    */
-  // allows applicants to submit their application
   static async applyChore(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -161,13 +170,12 @@ export default class ChoreController {
     }
   }
   /**
-   * @description This method allows a chore owner to get all their chores
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @method getAllChores
+   * @description Retrieves all chores with the specified category
+   * @param {Object} req - request object
+   * @param {Object} res - response object
+   * @returns {Object} - response object with the fetched chores
    */
-  //get chores by creator
   static async getAllChores(req, res) {
     try {
       const user = req.user;
@@ -186,13 +194,17 @@ export default class ChoreController {
     }
   }
   /**
-   * @description This method allows a chore owner accept applicants who apply for a chore
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @summary Accepts an applicant for a chore
+   * @description This method finds a chore specified by the id passed in the request object,
+   * sets the acceptedApplicant property of the chore object to true and updates the choreApplicants
+   * array of the chore object to set the choreAccepted property of the applicant to true. It also
+   * sends a message to the applicant using dbUpdate.createMessage and updates the user using
+   * dbUpdate.updateUser, then saves the chore with the updates.
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} The chore object with the updates
+   *
    */
-  //accept applicants who apply for a chore
   static async acceptApplicant(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -225,12 +237,13 @@ export default class ChoreController {
       );
     }
   }
+
   /**
-   * @description This method allows choriesta to search for a chore based on a keyword
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   *  @name searchChores
+   *  @description Searches for chores based on a given query
+   *  @param {Object} req - The request object
+   *  @param {Object} res - The response object
+   *  @return {Object} - Results of the search query
    */
 
   static async searchChores(req, res) {
@@ -250,12 +263,14 @@ export default class ChoreController {
       );
     }
   }
+
   /**
-   * @description This method updates the chore status when the choreowner starts and when the choriesta completes it
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @description This method is used to update a chore's status, reviews, completed time, total hours and pay rate.
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   *
+   * @return {Object} A JSON object containing the chore, user, and token
    */
 
   static async choreStatus(req, res) {
@@ -286,13 +301,12 @@ export default class ChoreController {
     });
   }
   /**
-   * @description This method allows a chore owner to delete a chore
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name deleteChore
+   * @description Deletes a chore from the database.
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   * @returns {Object} An object with a success key.
    */
-  // delete a chore
   static async deleteChore(req, res) {
     try {
       const user = req.user;
@@ -306,12 +320,15 @@ export default class ChoreController {
       );
     }
   }
+
   /**
-   * @description This method allows a chore owner to  update chore details
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name updateChore
+   * @description Updates an existing chore
+   *
+   * @param {Object} req - the request object
+   * @param {Object} res - the response object
+   *
+   * @returns {Object} An object containing the success status and the updated chore
    */
 
   static async updateChore(req, res) {
