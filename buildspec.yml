@@ -5,6 +5,7 @@ phases:
     commands:
       # Install dependencies needed for running tests
       - npm install
+      - npm install --global nodemon
 
       # Upgrade AWS CLI to the latest version
       # - npm start

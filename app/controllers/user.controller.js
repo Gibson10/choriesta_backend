@@ -10,13 +10,12 @@ import { Request, Response, NextFunction } from "express";
 
 export default class UserController {
   /**
-   * @description - This method gets all users
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getUser
+   * @description Retrieves the user from the request object and returns them
+   * @param {Object} req - The incoming request object
+   * @param {Object} res - The outgoing response object
+   * @returns {Object} - The response containing the user
    */
-
   static async getUser(req, res) {
     try {
       const user = req.user;
@@ -31,11 +30,11 @@ export default class UserController {
   }
 
   /**
-   * @description - This method deletes a user account
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name deleteUserAccount
+   * @description Deletes a user account from the database, it first checks the type of user to delete and invokes the appropriate method
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} Response object with the deleted user
    */
 
   static async deleteUserAccount(req, res) {
@@ -58,13 +57,21 @@ export default class UserController {
   }
 
   /**
-   * @description - This method update user's account
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @summary Updates user data in the system
+   * @description This method updates the user data from the request body and file.
+   * The request body should contain the keys of the fields to be updated and the file object should contain the file to be uploaded.
+   * This method only allows updates to the fields specified in the allowedUpdates array.
+   * If the request body contains any other keys, the server will respond with an Invalid updates error.
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} A response object containing the updated user data and token
+   *
+   * @example
+   *
+   *  updateUser(req, res)
+   *  // returns { success: true, user: user, token: user.tokens[0].token }
    */
-
   static async updateUser(req, res) {
     const httpRequest = adaptRequest(req);
     const { body, file } = httpRequest;
@@ -128,12 +135,14 @@ export default class UserController {
       );
     }
   }
+
   /**
-   * @description - This method gets all messages from both receivers and senders
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getMessages
+   * @description Retrieves a list of messages from the database
+   * @async
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} A response containing a list of messages
    */
 
   static async getMessages(req, res) {
@@ -152,12 +161,13 @@ export default class UserController {
       );
     }
   }
+
   /**
-   * @description - This method update user's reviews
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @function createUserReviews
+   * @description Creates user reviews
+   * @param {Object} req - the request object
+   * @param {Object} res - the response object
+   * @returns {Object} - the response object
    */
 
   static async createUserReviews(req, res) {
@@ -176,12 +186,15 @@ export default class UserController {
       );
     }
   }
+
   /**
-   * @description - This method gets user's reviews
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   * @returns
+   * @name getUserReviews
+   * @description Retrieves reviews for a given user
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   *
+   * @returns {Object} - An object containing the user reviews
    */
 
   static async getUserReviews(req, res) {
