@@ -17,7 +17,6 @@ export default async function makeDb() {
     // url = `mongodb+srv://${config.username}:${config.password}@${config.host}/${config.database}?retryWrites=true&w=majority`;
     url = `mongodb+srv://${config.username}:${config.password}@${config.host}/${config.database}?retryWrites=true&w=majority`;
   } else {
-    // Use this url locally
     // url = `mongodb://localhost:27017`;
     url = `mongodb+srv://${config.username}:${config.password}@${config.host}/${config.database}?retryWrites=true&w=majority`;
   }

@@ -5,8 +5,23 @@ import User from "../models/src/user.model";
 import randomGenerate from "../helpers/codeGenerate";
 import { mailer } from "../helpers/sendGrid";
 
+import { Request, Response, NextFunction } from "express";
+
 export default class AuthController {
-  //login a user
+  /**
+   *
+   * login()
+   *
+   * This static method logs a user in to their account.
+   *
+   * @param {Object} req - The HTTP request object
+   * @param {Object} res - The HTTP response object
+   *
+   * @returns {Object} A response object containing the user and the token
+   *
+   * @throws {Error} If the credentials provided are not valid.
+   */
+
   static async login(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -41,7 +56,22 @@ export default class AuthController {
     }
   }
 
-  /// create a new user
+  /**
+   * createNewUser is a static async method used to register a new user in the system.
+   *
+   * @param {object} req - the request object containing the request data
+   * @param {object} res - the response object used to respond to the request
+   *
+   * @returns {object} - either an error object or a success object containing the newly created user and token
+   *
+   *
+   * The method first adapts the request data and validates the inputs using the Helper.validateLoginInput method. It then checks if the user exists using the User.findOne method and returns an error if the user already exists.
+   *
+   * If the user does not exist, the method creates a new instance of the User model, generates a token and a signup code and then sends a mailer to the user's email address.
+   *
+   * Finally, the method returns a success response with the new user and token.
+   */
+
   static async createNewUser(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -81,6 +111,16 @@ export default class AuthController {
       );
     }
   }
+  /**
+   * @name confirmUser
+   * @description Confirms a user based on the registration or password reset code provided
+   *
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   *
+   * @returns {Object} The user object
+   */
+
   //confirm whether a user is registered
   static async confirmUser(req, res) {
     const httpRequest = adaptRequest(req);
@@ -106,8 +146,17 @@ export default class AuthController {
       );
     }
   }
+  /**
+   * @name resendCode
+   * @description This method is used to resend the code to the user's email
+   * @async
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @returns {Object} The response object with the updated user
+   *
+   * @throws {HttpError} Will throw an error if there is an internal issue
+   */
 
-  //resend confirmation code
   static async resendCode(req, res) {
     try {
       const user = req.user;
@@ -121,8 +170,16 @@ export default class AuthController {
       );
     }
   }
+  /**
+   * @name confirmEmail
+   * @description Confirm a user's email address
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   *
+   * @returns {Object} The user and token
+   */
 
-  //send a confirmation that a user's email is registered
   static async confirmEmail(req, res) {
     const httpRequest = adaptRequest(req);
     const { body } = httpRequest;
@@ -142,7 +199,14 @@ export default class AuthController {
     }
   }
 
-  /// Log out from current session
+  /**
+   * @name logout
+   * @description Logs the user out of their account.
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @returns {Object} - Returns a response indicating success or failure
+   */
+
   static async logout(req, res) {
     try {
       req.user.tokens = req.user.tokens.filter((token) => {
@@ -159,7 +223,17 @@ export default class AuthController {
     }
   }
 
-  /// Log out all sessions from every devices
+  /**
+   * @name logoutAll
+   * @description Logs out all active sessions for an authenticated user
+   * @async
+   *
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   *
+   * @returns {Object} - The response object containing a success flag
+   */
+
   static async logoutAll(req, res) {
     try {
       req.user.tokens = [];
